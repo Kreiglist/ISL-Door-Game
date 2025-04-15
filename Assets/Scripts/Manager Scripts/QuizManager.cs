@@ -82,7 +82,6 @@ public class QuizManager : MonoBehaviour
             {
                 questionChangeTime = 1.580f;
                 HUDManager.Instance.AddScore(scoreValueIncorrect);
-                Gun.instance.TransitionAnimation(false);
                 HUDManager.Instance.GameOver(true);
             }
             if (unansweredQuestions.Count == 0)
@@ -154,12 +153,13 @@ public class QuizManager : MonoBehaviour
 
         if(ammo.currAmmo == 0)
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             foreach(Button btn in options)
             {
                 btn.interactable = false;
             }
-            HUDManager.Instance.GameOver(true); // Activate the game over screen
+            CutsceneManager.instance.CutscenePlayer("Test");
+            //HUDManager.Instance.GameOver(true); // Activate the game over screen
         }
     }
     public void Answer(int btnIndex) // Function for answering / clicking buttons (or doors)
@@ -223,10 +223,10 @@ public class QuizManager : MonoBehaviour
         }
 
         MovingPanel.Instance.ResetPanel();
+        CutsceneManager.instance.CutscenePlayer(default);
     }
     private IEnumerator WaitForGun(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Gun.instance.TransitionAnimation(true);
     }
 }
