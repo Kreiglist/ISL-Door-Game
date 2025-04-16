@@ -1041,7 +1041,7 @@ MonoBehaviour:
     maxMasterTime: 0
   ammo:
     currAmmo: 0
-    maxAmmo: 1
+    maxAmmo: 2
 --- !u!4 &631018354
 Transform:
   m_ObjectHideFlags: 0
@@ -2990,14 +2990,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cutscene Screen
       objectReference: {fileID: 0}
-    - target: {fileID: 2940982067057237240, guid: ae6d609d943ed5c438ef0c789fdc2edd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3486574672685873914, guid: ae6d609d943ed5c438ef0c789fdc2edd, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4654129745078690812, guid: ae6d609d943ed5c438ef0c789fdc2edd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3078,14 +3070,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3486574672685873914, guid: ae6d609d943ed5c438ef0c789fdc2edd, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2940982067057237240, guid: ae6d609d943ed5c438ef0c789fdc2edd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3993097046618736849}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae6d609d943ed5c438ef0c789fdc2edd, type: 3}
 --- !u!224 &3993097046618736847 stripped
 RectTransform:
@@ -3097,27 +3085,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2940982067057237240, guid: ae6d609d943ed5c438ef0c789fdc2edd, type: 3}
   m_PrefabInstance: {fileID: 3993097046618736846}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3993097046618736849
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993097046618736848}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 945a5ff54ae166c4c946fc22809940d7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7635188402307315881
 PrefabInstance:
   m_ObjectHideFlags: 0

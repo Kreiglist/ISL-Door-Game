@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private AudioClip walkSFX;
 
     public static Gun instance;
-    private Animator animator;
+    private Animator gunAnimator;
     private SpriteRenderer sr;
 
     private void Awake()
@@ -21,38 +21,37 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        gunAnimator = GetComponent<Animator>();
     }
     
     // PUBLIC FUNCTIONS
-    public void ShootAnim()
+    public void GunAnimPlayer(string animName)
     {
-        animator.SetBool("Shoot", true);
-        AudioManager.instance.PlayAudio(shootSFX, transform);
-        StartCoroutine(ShootAnimEnd(0.3f));
-    }
-    private void TransitionAnimation(bool correct)
-    {
-        if (correct == true)
+        AnimationClip[] cutsceneClips = gunAnimator.runtimeAnimatorController.animationClips;
+
+        foreach (AnimationClip clip in cutsceneClips)
         {
-            sr.enabled = false;
-            AudioManager.instance.PlayAudio(walkSFX, transform);
-            CutsceneManager.instance.CutscenePlayer("Walk");
-            StartCoroutine(TransScreen(2.063f));
+            switch (animName)
+            {
+                case "Shoot":
+                    float shootLen = clip.length;
+                    print("Got " + clip.name + " w/Length " + clip.length);
+                    AudioManager.instance.PlayAudio(shootSFX, transform);
+                    StartCoroutine(GunAnimPlayer(shootLen, "Shoot"));
+                    
+                    break;
+                default:
+                    print("Default is running");
+                    break;
+            }
         }
     }
-    
-    // IENUMERATORS
-    private IEnumerator ShootAnimEnd(float delay)
+
+    private IEnumerator GunAnimPlayer(float duration, string animName)
     {
-        yield return new WaitForSeconds(delay);
-        animator.SetBool("Shoot", false);
-        TransitionAnimation(true);
-    }
-    private IEnumerator TransScreen(float duration)
-    {
+        gunAnimator.SetBool(animName, true);
         yield return new WaitForSeconds(duration);
-        CutsceneManager.instance.CutscenePlayer(default);
-        sr.enabled = true;
+        gunAnimator.SetBool(animName, false);
+        //sr.enabled = false;
     }
 }

@@ -34,14 +34,12 @@ public class QuizManager : MonoBehaviour
     }
     private void Start()
     {
-        HUDManager.Instance.GameOver(false); // Disable the game over screen
-
         ammo.currAmmo = ammo.maxAmmo; // Start with full ammunition
         HUDManager.Instance.AmmoCount(ammo.currAmmo); // Display the ammunition
 
         MovingPanel.Instance.SetTimer(timeLimit); // Set the timer's time
         
-        Time.timeScale = 1; // Make sure the coroutine is running
+        //Time.timeScale = 1; // Make sure the coroutine is running
         timer.StartMasterTimer(masterTimeLimit); // Start the Master timer
         timer.StartTimer(timeLimit); // Start the moving panel
 
@@ -54,34 +52,32 @@ public class QuizManager : MonoBehaviour
     private void Update()
     {
         QuestionTimer();
-        MasterTimer();
     }
-    private void MasterTimer()
+    
+    private void QuestionTimer()
     {
-        if(timer.isMasterRunning == true)
+        // Master Timer
+        if (timer.isMasterRunning == true)
         {
             timer.RunMasterTimer();
             HUDManager.Instance.SetMasterTimer(timer.currMasterTime);
 
-            if(timer.currMasterTime == 0)
+            if (timer.currMasterTime == 0)
             {
-                Time.timeScale = 0;
                 HUDManager.Instance.GameOver(true);
             }
         }
-    }
-    private void QuestionTimer()
-    {
+
+        // Question Timer
         if (timer.isRunning == true)
         {
             timer.RunTimer();
             HUDManager.Instance.SetTimer(timer.currTime);
             MovingPanel.Instance.MovePanel();
 
-            if (timer.currTime == 0) // If the player run out of time, penalize and change question
+            if (timer.currTime == 0) // End the game when the player runs out of time
             {
                 questionChangeTime = 1.580f;
-                HUDManager.Instance.AddScore(scoreValueIncorrect);
                 HUDManager.Instance.GameOver(true);
             }
             if (unansweredQuestions.Count == 0)
@@ -153,13 +149,11 @@ public class QuizManager : MonoBehaviour
 
         if(ammo.currAmmo == 0)
         {
-            //Time.timeScale = 0;
             foreach(Button btn in options)
             {
                 btn.interactable = false;
             }
-            CutsceneManager.instance.CutscenePlayer("Test");
-            //HUDManager.Instance.GameOver(true); // Activate the game over screen
+            HUDManager.Instance.GameOver(true); // Activate the game over screen
         }
     }
     public void Answer(int btnIndex) // Function for answering / clicking buttons (or doors)
@@ -171,7 +165,8 @@ public class QuizManager : MonoBehaviour
         {
             questionChangeTime = 2.063f;
             // SHELLS / LIVES
-            Gun.instance.ShootAnim();
+            Gun.instance.GunAnimPlayer("Shoot");
+            CutsceneManager.instance.CutscenePlayer("Walk");
             Shotgun(true); // Set to true, in which add shells
             HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
 
@@ -193,7 +188,7 @@ public class QuizManager : MonoBehaviour
         else if (currQuestion.answer != currQuestion.options[btnIndex])  // If the player answer wrong
         {
             // SHELLS / LIVES
-            Gun.instance.ShootAnim();
+            Gun.instance.GunAnimPlayer("Shoot");
             Shotgun(false); // Set to false, in which reduce shells
             HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
 

@@ -20,13 +20,13 @@ public class CutsceneManager : MonoBehaviour
     {
         cutsceneScreenAnimator = cutsceneScreen.GetComponent<Animator>();
     }
-    public void CutscenePlayer(string anim)
+    public void CutscenePlayer(string animName)
     {
         AnimationClip[] cutsceneClips = cutsceneScreenAnimator.runtimeAnimatorController.animationClips;
 
         foreach(AnimationClip clip in cutsceneClips)
         {
-            switch(anim)
+            switch(animName)
             {
                 case "Walk":
                     cutsceneScreen.SetActive(true);
@@ -48,7 +48,7 @@ public class CutsceneManager : MonoBehaviour
     }
     private IEnumerator PlayCutscene(float duration, string animName)
     {
-        yield return new WaitForSeconds(duration);
         cutsceneScreenAnimator.Play(animName);
+        yield return new WaitForSeconds(duration);
     }
 }

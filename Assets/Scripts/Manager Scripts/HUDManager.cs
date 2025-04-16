@@ -31,6 +31,7 @@ public class HUDManager : MonoBehaviour
         UpdateTimer();
         UpdateMasterTimer();
         UpdateAmmo();
+        GameOver(false);
     }
     public void AddScore(int value)
     {
@@ -52,15 +53,19 @@ public class HUDManager : MonoBehaviour
         ammo = value;
         UpdateAmmo();
     }
-    
     public void GameOver(bool activate)
     {
         if (activate == true)
         {
             gameOverScreen.SetActive(true);
             UpdateScore();
+            Time.timeScale = 0;
         }
-        else gameOverScreen.SetActive(false);
+        else
+        {
+            Time.timeScale = 1;
+            gameOverScreen.SetActive(false);
+        }
     }
     
     private void UpdateScore()
