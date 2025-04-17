@@ -7,6 +7,9 @@ public class CutsceneManager : MonoBehaviour
 
     //[SerializeField] private GameObject menuCutscene;
     [SerializeField] private GameObject cutsceneScreen;
+    [SerializeField] private AudioClip walkSFX;
+
+    public float walkLen;
     private Animator cutsceneScreenAnimator;
     private void Awake()
     {
@@ -30,15 +33,9 @@ public class CutsceneManager : MonoBehaviour
             {
                 case "Walk":
                     cutsceneScreen.SetActive(true);
-                    float walkLen = clip.length;
-                    print("Got " + clip.name + " w/Length " + clip.length);
+                    walkLen = clip.length;
+                    AudioManager.instance.PlayAudio(walkSFX, transform);
                     StartCoroutine(PlayCutscene(walkLen, "Walk"));
-                    break;
-                case "Test":
-                    cutsceneScreen.SetActive(true);
-                    float testLen = clip.length;
-                    print("Got " + clip.name + " w/Length " + clip.length);
-                    StartCoroutine(PlayCutscene(testLen, "Walk"));
                     break;
                 default:
                     cutsceneScreen.SetActive(false);

@@ -53,15 +53,15 @@ public class HUDManager : MonoBehaviour
         ammo = value;
         UpdateAmmo();
     }
-    public void GameOver(bool activate)
+    public void GameOver(bool activate) 
     {
-        if (activate == true)
+        if (activate == true) // Activate the game over screen and stop the game from running
         {
             gameOverScreen.SetActive(true);
             UpdateScore();
             Time.timeScale = 0;
         }
-        else
+        else // Make sure the game over screen is off and the game and coroutines are running
         {
             Time.timeScale = 1;
             gameOverScreen.SetActive(false);

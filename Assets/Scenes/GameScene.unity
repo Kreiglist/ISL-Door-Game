@@ -1027,7 +1027,6 @@ MonoBehaviour:
   - {fileID: 408308216}
   - {fileID: 437144884}
   - {fileID: 558175323}
-  questionChangeTime: 0.5
   scoreValueCorrect: 100
   scoreValueIncorrect: -50
   masterTimeLimit: 10
@@ -1041,7 +1040,7 @@ MonoBehaviour:
     maxMasterTime: 0
   ammo:
     currAmmo: 0
-    maxAmmo: 2
+    maxAmmo: 3
 --- !u!4 &631018354
 Transform:
   m_ObjectHideFlags: 0
@@ -1102,6 +1101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutsceneScreen: {fileID: 3993097046618736848}
+  walkSFX: {fileID: 8300000, guid: 570994f7052b2f5429797edbd8554191, type: 3}
+  walkLen: 0
 --- !u!1 &757340575
 GameObject:
   m_ObjectHideFlags: 0
@@ -3183,7 +3184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootSFX: {fileID: 8300000, guid: 3a6e195806ea73a4887ed88a468c07a2, type: 3}
-  walkSFX: {fileID: 8300000, guid: 570994f7052b2f5429797edbd8554191, type: 3}
+  shootLen: 0
 --- !u!95 &7635188402307315886
 Animator:
   serializedVersion: 5

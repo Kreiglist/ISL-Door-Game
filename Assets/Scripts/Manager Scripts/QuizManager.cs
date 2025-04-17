@@ -11,7 +11,6 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private QuestionsScriptable questionsList; // Get the question scriptable
     [SerializeField] private Image questionImg; // The image component that will display the question images
     [SerializeField] private List<Button> options; // The options / doors
-    [SerializeField] private float questionChangeTime; // How long does it take to change questions once answered correctly
 
     [SerializeField] public int scoreValueCorrect = 100;
     [SerializeField] public int scoreValueIncorrect = -50;
@@ -38,8 +37,6 @@ public class QuizManager : MonoBehaviour
         HUDManager.Instance.AmmoCount(ammo.currAmmo); // Display the ammunition
 
         MovingPanel.Instance.SetTimer(timeLimit); // Set the timer's time
-        
-        //Time.timeScale = 1; // Make sure the coroutine is running
         timer.StartMasterTimer(masterTimeLimit); // Start the Master timer
         timer.StartTimer(timeLimit); // Start the moving panel
 
@@ -54,9 +51,9 @@ public class QuizManager : MonoBehaviour
         QuestionTimer();
     }
     
-    private void QuestionTimer()
+    private void QuestionTimer() // Run the moving questions and quiz timer
     {
-        // Master Timer
+        // Master Timer, How much time the player has to play the quiz //
         if (timer.isMasterRunning == true)
         {
             timer.RunMasterTimer();
@@ -67,8 +64,7 @@ public class QuizManager : MonoBehaviour
                 HUDManager.Instance.GameOver(true);
             }
         }
-
-        // Question Timer
+        // Question Timer, How much time it takes for the moving question to "squish the player" causing a game over //
         if (timer.isRunning == true)
         {
             timer.RunTimer();
@@ -77,14 +73,7 @@ public class QuizManager : MonoBehaviour
 
             if (timer.currTime == 0) // End the game when the player runs out of time
             {
-                questionChangeTime = 1.580f;
                 HUDManager.Instance.GameOver(true);
-            }
-            if (unansweredQuestions.Count == 0)
-            {
-                // If there are no unanswered questions in the list, then refresh the list
-                unansweredQuestions = questionsList.questions.ToList<Question>();
-                StartCoroutine(NextQuestion());
             }
         }
     }
@@ -114,14 +103,13 @@ public class QuizManager : MonoBehaviour
         {
             Debug.LogError("currQuestion is NULL! No question assigned.");
         }
-        // Assign answer choices to buttons
+        // Assign answer choices to options/doors //
         for (int i = 0; i < options.Count; i++)
         {
             if (i < currQuestion.options.Count)
             {
                 options[i].GetComponentInChildren<Text>().text = currQuestion.options[i]; // Assign text
                 int index = i; // Store index to avoid closure issues
-
                 // Remove old listeners and add new one
                 options[i].onClick.RemoveAllListeners();
                 options[i].onClick.AddListener(() => Answer(index));
@@ -136,7 +124,7 @@ public class QuizManager : MonoBehaviour
     {
         clickedButton.interactable = false; // Ensures the disabled sprite is shown
     }
-    private void Shotgun(bool correct) // Function for adding and removing shells/lives
+    private void AnswerGun(bool correct) // Function for adding and removing bullets/lives
     {
         if (correct == true)
         {
@@ -146,7 +134,7 @@ public class QuizManager : MonoBehaviour
         {
             ammo.Reduce(1);
         }
-
+        // Argument for when the player runs out of bullets //
         if(ammo.currAmmo == 0)
         {
             foreach(Button btn in options)
@@ -160,44 +148,42 @@ public class QuizManager : MonoBehaviour
     {
         Button clickedButton = options[btnIndex];
         OnButtonClick(clickedButton);
-
+        // The following if-else statement is used for when the player answers correctly or incorrectly //
         if (currQuestion.answer == currQuestion.options[btnIndex]) // If the player answer correctly
         {
-            questionChangeTime = 2.063f;
-            // SHELLS / LIVES
-            Gun.instance.GunAnimPlayer("Shoot");
-            CutsceneManager.instance.CutscenePlayer("Walk");
-            Shotgun(true); // Set to true, in which add shells
-            HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
+            StartCoroutine(CorrectAnswer(true));
+            AnswerGun(true); // Set to true, in which add shells
 
+            HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
             HUDManager.Instance.AddScore(scoreValueCorrect); // add points
-            timer.isRunning = false; // stop the timer
-            timer.isMasterRunning = false;
-            print("Correct");
 
-            StartCoroutine(WaitForGun(0.3f));
+            timer.isRunning = false; // stop the moving question
+            timer.isMasterRunning = false; // stop the timer
+        }
+        else  // If the player answer wrong
+        {
+            StartCoroutine(CorrectAnswer(false));
+            AnswerGun(false); // Set to false, in which reduce shells
 
-            StartCoroutine(NextQuestion());
-        }
-        if (unansweredQuestions.Count == 0) // So the questions will cycle
-        {
-            // If there are no unanswered questions in the list, then refresh the list
-            unansweredQuestions = questionsList.questions.ToList<Question>();
-            StartCoroutine(NextQuestion());
-        }
-        else if (currQuestion.answer != currQuestion.options[btnIndex])  // If the player answer wrong
-        {
-            // SHELLS / LIVES
-            Gun.instance.GunAnimPlayer("Shoot");
-            Shotgun(false); // Set to false, in which reduce shells
             HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
-
             HUDManager.Instance.AddScore(scoreValueIncorrect); // deduct points
-            options[btnIndex].interactable = false; // disable the door/button
-            print("Incorrect");
+
+            options[btnIndex].interactable = false; // disable the recently clicked door/option
         }
     }
     // IENUMERATORS
+    private IEnumerator CorrectAnswer(bool answer)
+    {
+        Gun.instance.GunAnimPlayer("Shoot");
+        yield return new WaitForSeconds(Gun.instance.shootLen);
+
+        if(answer == true)
+        {
+            CutsceneManager.instance.CutscenePlayer("Walk");
+            yield return new WaitForSeconds(CutsceneManager.instance.walkLen);
+            yield return StartCoroutine(NextQuestion());
+        }
+    }
     private IEnumerator NextQuestion() // IEnumerator for cycling questions
     {
         foreach (Button btn in options) // removes listeners doors for the duration
@@ -206,7 +192,12 @@ public class QuizManager : MonoBehaviour
         }
 
         unansweredQuestions.Remove(currQuestion); // remove recently answered question
-        yield return new WaitForSeconds(questionChangeTime);
+
+        if (unansweredQuestions == null || unansweredQuestions.Count == 0) // So the questions will cycle
+        {
+            // If there are no unanswered questions in the list, then refresh the list
+            unansweredQuestions = questionsList.questions.ToList<Question>();
+        }
 
         timer.StartTimer(timeLimit); // Restart the timer 
         timer.isMasterRunning = true;
@@ -217,11 +208,9 @@ public class QuizManager : MonoBehaviour
             btn.interactable = true;
         }
 
-        MovingPanel.Instance.ResetPanel();
+        MovingPanel.Instance.ResetPanel(); // Set the moving question back to its initial position
         CutsceneManager.instance.CutscenePlayer(default);
-    }
-    private IEnumerator WaitForGun(float delay)
-    {
-        yield return new WaitForSeconds(delay);
+        Gun.instance.GunAnimPlayer(default);
+        yield return null;
     }
 }

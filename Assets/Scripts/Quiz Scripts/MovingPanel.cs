@@ -5,7 +5,6 @@ using UnityEngine;
 public class MovingPanel : MonoBehaviour
 {
     public static MovingPanel Instance;
-    //[SerializeField] float duration = 3f;
     float duration;
     Vector3 startPos;
     Vector3 targetPos;
