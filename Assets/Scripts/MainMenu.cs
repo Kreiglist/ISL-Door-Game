@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
+    private void Start()
+    {
+        pauseScreen.SetActive(false);
+    }
     private void Update()
     {
         PauseGame();
@@ -23,17 +25,25 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Game Closed");
         Application.Quit();
     }
-    private void PauseGame()
+    public void PauseGame()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && pauseScreen.activeInHierarchy == false)
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0;
-            pauseScreen.SetActive(true);
+            if (pauseScreen.activeInHierarchy == false)
+            {
+                Time.timeScale = 0;
+                pauseScreen.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                pauseScreen.SetActive(false);
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && pauseScreen.activeInHierarchy == true)
-        {
-            Time.timeScale = 1;
-            pauseScreen.SetActive(false);
-        }
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
     }
 }
