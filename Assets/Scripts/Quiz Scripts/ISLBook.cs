@@ -3,33 +3,44 @@ using UnityEngine.UI;
 
 public class ISLBook : MonoBehaviour
 {
-    private Image bookCover;
-    private Image pageLeft;
-    private Image pageRight;
-    private void Awake()
+    [SerializeField] private Image leftPage;
+    [SerializeField] private Image rightPage;
+    [SerializeField] private Sprite[] pageSprites;
+    [SerializeField] private AudioClip pageSFX;
+
+    private int currentPageIndex = 0;
+
+    public void FlipToNextPage()
     {
-        bookCover = GetComponent<Image>();
-        pageLeft = GetComponentInChildren<Image>();
-        pageRight = GetComponentInChildren<Image>();
-    }
-    private void Start()
-    {
-        bookCover.enabled = false;
-        pageLeft.enabled = false;
-        pageRight.enabled = false;
-    }
-    public void IsBookActive()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
+        AudioManager.instance.PlayAudio(pageSFX, transform);
+        if (currentPageIndex < pageSprites.Length - 2)
         {
-            if (gameObject.activeInHierarchy == false)
-            {
-                gameObject.SetActive(true);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
+            currentPageIndex += 2;
+            UpdatePages();
         }
+    }
+
+    public void FlipToPreviousPage()
+    {
+        AudioManager.instance.PlayAudio(pageSFX, transform);
+        if (currentPageIndex > 0)
+        {
+            currentPageIndex -= 2;
+            UpdatePages();
+        }
+    }
+
+    private void UpdatePages()
+    {
+        leftPage.sprite = pageSprites[currentPageIndex];
+
+        if (currentPageIndex + 1 < pageSprites.Length)
+            rightPage.sprite = pageSprites[currentPageIndex + 1];
+    }
+
+    // Initialize the book with the first pages
+    void Start()
+    {
+        UpdatePages();
     }
 }

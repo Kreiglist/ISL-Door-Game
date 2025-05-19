@@ -51,10 +51,5 @@ public class Gun : MonoBehaviour
         gunAnimator.SetBool(animName, true);
         yield return new WaitForSeconds(duration);
         gunAnimator.SetBool(animName, false);
-
-        if(animName == "Shoot")
-        {
-            gunSR.enabled = false;
-        }
     }
 }

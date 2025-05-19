@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 78213353}
   - component: {fileID: 78213352}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Main Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,7 +624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d89e8d186e8241a9a2857589c142c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseScreen: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,14 +1499,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '
-
-    Bisindo SET - West Java Ver. "Bahasa Isyarat Indonesia" Celestia
-    Theme Art by Nirtch
-
-
-    Half-Life 2, Left 4 Dead 2, and Counter Strike: Source
-    assets by Valve'
+  m_Text: "\nBisindo SET - West Java Ver. \"Bahasa Isyarat Indonesia\" Celestia Theme
+    Art by Nirtch\n\nHalf-Life 2, Left 4 Dead 2, and Counter Strike: Source assets
+    by Valve\n\nHalf-Life 2: MMod - Weapon Replacements Redux -Published to  GMod
+    by \u049Aatka and c4sual\n\nBadass Tracer & Muzzleflash\r - Published to GMod
+    by kenni\n\npage turn.wav and page turn2.wav - at Freesound.org by nsstudio\n"
 --- !u!222 &1314699028
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1745,7 +1741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2078985856
 RectTransform:
   m_ObjectHideFlags: 0
