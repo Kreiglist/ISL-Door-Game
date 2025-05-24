@@ -70,8 +70,11 @@ public class HUDManager : MonoBehaviour
     
     private void UpdateScore()
     {
-        scoreText.text = "Score:" + score.ToString();
-        finalScoreText.text = "Your Final Score: " + score.ToString();
+        if (score >= 0)
+        {
+            scoreText.text = "Score:" + score.ToString();
+            finalScoreText.text = "Your Final Score: " + score.ToString();
+        }
     }
     private void UpdateTimer()
     {
