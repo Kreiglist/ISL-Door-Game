@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     public float shootLen;
     private Animator gunAnimator;
     private SpriteRenderer gunSR;
+    private Camera mainCamera;
 
     private void Awake()
     {
@@ -23,6 +24,17 @@ public class Gun : MonoBehaviour
     {
         gunSR = GetComponent<SpriteRenderer>();
         gunAnimator = GetComponent<Animator>();
+
+        mainCamera = Camera.main;
+    }
+    void Update()
+    {
+        Vector3 screenPos = Input.mousePosition;
+        // Convert screen position to world point
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, mainCamera.nearClipPlane + 10f));
+
+        // Set gun's position — keep z consistent if needed
+        transform.position = new Vector3(worldPos.x, -1.5f, transform.position.z);
     }
     // PUBLIC FUNCTION
     public void GunAnimPlayer(string animName)
