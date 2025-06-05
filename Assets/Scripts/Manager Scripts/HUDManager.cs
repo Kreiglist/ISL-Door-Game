@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,10 @@ public class HUDManager : MonoBehaviour
     
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private Text finalScoreText;
+
+    [SerializeField] private GameObject highscorePrefab;
+    [SerializeField] private Transform highscoreFrame;
+    List<GameObject> highscoreUI = new List<GameObject>();
     
     private int score;
     private float time;
@@ -67,13 +72,50 @@ public class HUDManager : MonoBehaviour
             gameOverScreen.SetActive(false);
         }
     }
-    
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+    }
+    private void OnEnable()
+    {
+        HighscoreManager.onHighscoreListChanged += UpdateHighscore;
+    }
+    private void OnDisable()
+    {
+        HighscoreManager.onHighscoreListChanged -= UpdateHighscore;
+    }
+    private void UpdateHighscore(List<HighscoreElements> list)
+    {
+        for(int i = 0; i < list.Count; i++)
+        {
+            HighscoreElements he = list[i];
+
+            if(he.highscore >= 0)
+            {
+                if(i >= highscoreUI.Count)
+                {
+                    var inst = Instantiate(highscorePrefab, Vector3.zero, Quaternion.identity);
+                    inst.transform.SetParent(highscoreFrame, false);
+
+                    highscoreUI.Add(inst);
+                }
+                var texts = highscoreUI[i].GetComponentsInChildren<Text>();
+                texts[0].text = (i+1).ToString();
+                texts[1].text = he.highscore.ToString();
+            }
+        }
+    }
+
     private void UpdateScore()
     {
         if (score >= 0)
         {
             scoreText.text = "Score:" + score.ToString();
             finalScoreText.text = "Your Final Score: " + score.ToString();
+            //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(score));
         }
     }
     private void UpdateTimer()

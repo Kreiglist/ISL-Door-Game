@@ -50,7 +50,7 @@ public class QuizManager : MonoBehaviour
     {
         QuestionTimer();
     }
-    
+
     private void QuestionTimer() // Run the moving questions and quiz timer
     {
         // Master Timer, How much time the player has to play the quiz //
@@ -61,7 +61,7 @@ public class QuizManager : MonoBehaviour
 
             if (timer.currMasterTime == 0)
             {
-                HUDManager.Instance.GameOver(true);
+                EndGame();
             }
         }
         // Question Timer, How much time it takes for the moving question to "squish the player" causing a game over //
@@ -73,7 +73,7 @@ public class QuizManager : MonoBehaviour
 
             if (timer.currTime == 0) // End the game when the player runs out of time
             {
-                HUDManager.Instance.GameOver(true);
+                EndGame();
             }
         }
     }
@@ -135,13 +135,13 @@ public class QuizManager : MonoBehaviour
             ammo.Reduce(1);
         }
         // Argument for when the player runs out of bullets //
-        if(ammo.currAmmo == 0)
+        if (ammo.currAmmo == 0)
         {
-            foreach(Button btn in options)
+            EndGame();
+            foreach (Button btn in options)
             {
                 btn.interactable = false;
             }
-            HUDManager.Instance.GameOver(true); // Activate the game over screen
         }
     }
     public void Answer(int btnIndex) // Function for answering / clicking buttons (or doors)
@@ -171,13 +171,18 @@ public class QuizManager : MonoBehaviour
             options[btnIndex].interactable = false; // disable the recently clicked door/option
         }
     }
+    private void EndGame()
+    {
+        HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(HUDManager.Instance.Score));
+        HUDManager.Instance.GameOver(true); // Activate the game over screen
+    }
     // IENUMERATORS
     private IEnumerator CorrectAnswer(bool answer)
     {
         Gun.instance.GunAnimPlayer("Shoot");
         yield return new WaitForSeconds(Gun.instance.shootLen);
 
-        if(answer == true)
+        if (answer == true)
         {
             CutsceneManager.instance.CutscenePlayer("Walk");
             yield return new WaitForSeconds(CutsceneManager.instance.walkLen);

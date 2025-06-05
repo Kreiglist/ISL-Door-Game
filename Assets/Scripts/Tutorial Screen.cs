@@ -12,6 +12,10 @@ public class TutorialScreen : MonoBehaviour
     {
         UpdateTutorial();
     }
+    public void StartGame()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
     public void FlipToNext()
     {
         if (currentTutorialIndex < tutorialSprites.Length - 1)
