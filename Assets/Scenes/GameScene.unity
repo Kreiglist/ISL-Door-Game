@@ -1370,8 +1370,8 @@ MonoBehaviour:
   - {fileID: 558175323}
   scoreValueCorrect: 100
   scoreValueIncorrect: -50
-  masterTimeLimit: 6
-  timeLimit: 3
+  masterTimeLimit: 60
+  timeLimit: 6
   timer:
     isRunning: 0
     currTime: 0
@@ -1381,7 +1381,7 @@ MonoBehaviour:
     maxMasterTime: 0
   ammo:
     currAmmo: 0
-    maxAmmo: 1
+    maxAmmo: 6
 --- !u!4 &631018354
 Transform:
   m_ObjectHideFlags: 0

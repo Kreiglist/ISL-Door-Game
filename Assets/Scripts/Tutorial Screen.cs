@@ -26,7 +26,7 @@ public class TutorialScreen : MonoBehaviour
     }
     public void FlipToPrevious()
     {
-        if (currentTutorialIndex > 1)
+        if (currentTutorialIndex >= 1)
         {
             currentTutorialIndex--;
             UpdateTutorial();
