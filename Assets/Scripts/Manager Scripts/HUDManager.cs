@@ -114,7 +114,7 @@ public class HUDManager : MonoBehaviour
         if (score >= 0)
         {
             scoreText.text = "Score:" + score.ToString();
-            finalScoreText.text = "Your Final Score: " + score.ToString();
+            finalScoreText.text = "Your Score: " + score.ToString();
             //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(score));
         }
     }
