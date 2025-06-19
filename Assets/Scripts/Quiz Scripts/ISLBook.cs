@@ -12,7 +12,7 @@ public class ISLBook : MonoBehaviour
 
     public void FlipToNextPage()
     {
-        AudioManager.instance.PlayAudio(pageSFX, transform);
+        AudioManager.instance.PlayAudio(pageSFX, transform, 1f);
         if (currentPageIndex < pageSprites.Length - 2)
         {
             currentPageIndex += 2;
@@ -22,7 +22,7 @@ public class ISLBook : MonoBehaviour
 
     public void FlipToPreviousPage()
     {
-        AudioManager.instance.PlayAudio(pageSFX, transform);
+        AudioManager.instance.PlayAudio(pageSFX, transform, 1f);
         if (currentPageIndex > 0)
         {
             currentPageIndex -= 2;

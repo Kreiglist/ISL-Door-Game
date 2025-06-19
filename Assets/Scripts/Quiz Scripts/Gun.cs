@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
             {
                 case "Shoot":
                     shootLen = clip.length;
-                    AudioManager.instance.PlayAudio(shootSFX, transform);
+                    AudioManager.instance.PlayAudio(shootSFX, transform, 1f);
                     StartCoroutine(GunAnimPlayer(shootLen, "Shoot"));
                     print("Got " + clip.name + " w/Length " + clip.length);
                     break;

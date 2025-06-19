@@ -34,7 +34,7 @@ public class CutsceneManager : MonoBehaviour
                 case "Walk":
                     cutsceneScreen.SetActive(true);
                     walkLen = clip.length;
-                    AudioManager.instance.PlayAudio(walkSFX, transform);
+                    AudioManager.instance.PlayAudio(walkSFX, transform, 1f);
                     StartCoroutine(PlayCutscene(walkLen, "Walk"));
                     break;
                 default:

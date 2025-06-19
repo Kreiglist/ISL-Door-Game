@@ -12,12 +12,14 @@ public class AudioManager : MonoBehaviour
         }
         else Destroy(gameObject);
     }
-    public void PlayAudio(AudioClip audioClip, Transform spawnTransform)
+    public void PlayAudio(AudioClip audioClip, Transform spawnTransform, float volume)
     {
-        // Spawn GameObject
+        // Spawn the Audio source
         AudioSource audioSource = Instantiate(audioObject, spawnTransform.position, Quaternion.identity);
         // Assign Audioclip
         audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
 
         audioSource.Play();
 

@@ -33,7 +33,7 @@ public class GameMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && bookScreen.activeInHierarchy == false)
         {
             bookScreen.SetActive(true);
-            AudioManager.instance.PlayAudio(bookSFX, transform);
+            AudioManager.instance.PlayAudio(bookSFX, transform, 1f);
         }
         else if (Input.GetKeyDown(KeyCode.E) && bookScreen.activeInHierarchy == true)
         {
