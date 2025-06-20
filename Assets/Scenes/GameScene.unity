@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 84812640}
   - component: {fileID: 84812641}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Master Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1613,51 +1613,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1384415971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &638406564
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 638406565}
-  - component: {fileID: 638406566}
-  m_Layer: 0
-  m_Name: Audio Mixer Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &638406565
+--- !u!4 &638406565 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+  m_PrefabInstance: {fileID: 608091532548769792}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638406564}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1384415971}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &638406566
+--- !u!114 &638406566 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6211518290043536306, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+  m_PrefabInstance: {fileID: 608091532548769792}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638406564}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4785a35e6a59724295077082f2f23d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 1ed86c1d13ee1ba408525170a6c71ee1, type: 2}
 --- !u!1 &659843569
 GameObject:
   m_ObjectHideFlags: 0
@@ -3420,7 +3391,7 @@ GameObject:
   - component: {fileID: 1139961246}
   - component: {fileID: 1139961247}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: SFX Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5919,6 +5890,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028429412}
   m_CullTransparentMesh: 1
+--- !u!1001 &608091532548769792
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1384415971}
+    m_Modifications:
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 356102138429118356, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488953864809742501, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: m_Name
+      value: Audio Mixer Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211518290043536306, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1139961247}
+    - target: {fileID: 6211518290043536306, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
+      propertyPath: masterSlider
+      value: 
+      objectReference: {fileID: 84812641}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c43a0803f2ee9d4db2c441c1658afca, type: 3}
 --- !u!1001 &3993097046618736846
 PrefabInstance:
   m_ObjectHideFlags: 0

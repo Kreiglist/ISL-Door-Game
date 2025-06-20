@@ -22,11 +22,11 @@ public class GameMenu : MonoBehaviour
             Time.timeScale = 0;
             pauseScreen.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && pauseScreen.activeInHierarchy == true)
-        {
-            Time.timeScale = 1;
-            pauseScreen.SetActive(false);
-        }
+        //else if (Input.GetKeyDown(KeyCode.Escape) && pauseScreen.activeInHierarchy == true)
+        //{
+        //    Time.timeScale = 1;
+        //    pauseScreen.SetActive(false);
+        //}
     }
     public void IsBookActive()
     {
