@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class GameMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
@@ -22,20 +21,17 @@ public class GameMenu : MonoBehaviour
             Time.timeScale = 0;
             pauseScreen.SetActive(true);
         }
-        //else if (Input.GetKeyDown(KeyCode.Escape) && pauseScreen.activeInHierarchy == true)
-        //{
-        //    Time.timeScale = 1;
-        //    pauseScreen.SetActive(false);
-        //}
     }
     public void IsBookActive()
     {
-        if (Input.GetKeyDown(KeyCode.E) && bookScreen.activeInHierarchy == false)
+        KeyCode bookKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("CustomKey"));
+
+        if (Input.GetKeyDown(bookKey) && bookScreen.activeInHierarchy == false && pauseScreen.activeInHierarchy == false)
         {
             bookScreen.SetActive(true);
             AudioManager.instance.PlayAudio(bookSFX, transform, 1f);
         }
-        else if (Input.GetKeyDown(KeyCode.E) && bookScreen.activeInHierarchy == true)
+        else if (Input.GetKeyDown(bookKey) && bookScreen.activeInHierarchy == true && pauseScreen.activeInHierarchy == false)
         {
             bookScreen.SetActive(false);
         }
