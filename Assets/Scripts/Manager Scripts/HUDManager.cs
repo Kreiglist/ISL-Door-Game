@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class HUDManager : MonoBehaviour
 {
     public static HUDManager Instance;
@@ -17,7 +16,10 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private GameObject highscorePrefab;
     [SerializeField] private Transform highscoreFrame;
     List<GameObject> highscoreUI = new List<GameObject>();
-    
+
+    [SerializeField] private GameObject radialTimer;
+    public bool isRadialActive;
+
     private int score;
     private float time;
     private float masterTime;
@@ -33,7 +35,6 @@ public class HUDManager : MonoBehaviour
     void Start()
     {
         UpdateScore();
-        UpdateTimer();
         UpdateMasterTimer();
         UpdateAmmo();
         GameOver(false);
@@ -46,7 +47,6 @@ public class HUDManager : MonoBehaviour
     public void SetTimer(float value)
     {
         time = value;
-        UpdateTimer();
     }
     public void SetMasterTimer(float value)
     {
@@ -117,21 +117,6 @@ public class HUDManager : MonoBehaviour
             finalScoreText.text = "Your Score: " + score.ToString();
             //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(score));
         }
-    }
-    private void UpdateTimer()
-    {
-        // Rounds time down to the nearest whole number and converts it to an integer.
-        // Extracts only the seconds part from the time variable.
-        int seconds = Mathf.FloorToInt(time); 
-        
-        // Subtracts the whole seconds from time, leaving only the decimal part.
-        // Multiplies the decimal by 100 to convert it into a two-digit millisecond value. Extracts milliseconds.
-        int milliseconds = Mathf.FloorToInt((time - seconds) * 100);
-
-        // Formats the seconds and milliseconds values into a 00:00 format.
-        // - If seconds = 5, it shows 05.
-        // - If milliseconds = 3, shows 03.
-        timerText.text = string.Format("{0:00}:{1:00}", seconds, milliseconds);
     }
     private void UpdateMasterTimer()
     {
