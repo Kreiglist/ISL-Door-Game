@@ -21,7 +21,6 @@ public class HUDManager : MonoBehaviour
     public bool isRadialActive;
 
     private int score;
-    private float time;
     private float masterTime;
     private int ammo;
     private void Awake()
@@ -43,10 +42,6 @@ public class HUDManager : MonoBehaviour
     {
         score += value;
         UpdateScore();
-    }
-    public void SetTimer(float value)
-    {
-        time = value;
     }
     public void SetMasterTimer(float value)
     {

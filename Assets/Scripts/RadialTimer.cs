@@ -6,19 +6,25 @@ public class RadialTimer : MonoBehaviour
     private bool isActive = false;
     private float indicatorTimer;
     private float maxIndicatorTimer;
-    private Image radialImage;
+    [SerializeField] private Image radialImage;
+
+    public static RadialTimer Instance;
     private void Awake()
     {
-        radialImage = GetComponent<Image>();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else Destroy(gameObject);
     }
     void Update()
     {
-        if (isActive)
+        if (isActive == true)
         {
             indicatorTimer -= Time.deltaTime;
             radialImage.fillAmount = (indicatorTimer / maxIndicatorTimer);
 
-            if (indicatorTimer <= 0) StopCountdown();
+            if (indicatorTimer <= 0) RestartCountdown();
         }
     }
     public void StartCountdown(float countdownTime)
@@ -27,7 +33,7 @@ public class RadialTimer : MonoBehaviour
         maxIndicatorTimer = countdownTime;
         indicatorTimer = maxIndicatorTimer;
     }
-    public void StopCountdown()
+    public void RestartCountdown()
     {
         isActive = false;
     }

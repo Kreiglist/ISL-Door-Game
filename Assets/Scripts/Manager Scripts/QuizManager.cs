@@ -35,6 +35,7 @@ public class QuizManager : MonoBehaviour
     {
         ammo.currAmmo = ammo.maxAmmo; // Start with full ammunition
         HUDManager.Instance.AmmoCount(ammo.currAmmo); // Display the ammunition
+        RadialTimer.Instance.StartCountdown(timeLimit);
 
         MovingPanel.Instance.SetTimer(timeLimit); // Set the timer's time
         timer.StartMasterTimer(masterTimeLimit); // Start the Master timer
@@ -68,7 +69,6 @@ public class QuizManager : MonoBehaviour
         if (timer.isRunning == true)
         {
             timer.RunTimer();
-            HUDManager.Instance.SetTimer(timer.currTime);
             MovingPanel.Instance.MovePanel();
 
             if (timer.currTime == 0) // End the game when the player runs out of time
