@@ -159,6 +159,7 @@ public class QuizManager : MonoBehaviour
 
             timer.isRunning = false; // stop the moving question
             timer.isMasterRunning = false; // stop the timer
+            RadialTimer.Instance.RestartCountdown();
         }
         else  // If the player answer wrong
         {
@@ -206,6 +207,7 @@ public class QuizManager : MonoBehaviour
 
         timer.StartTimer(timeLimit); // Restart the timer 
         timer.isMasterRunning = true;
+        RadialTimer.Instance.StartCountdown(timeLimit);
         GetQuestion(); // Get a new question
 
         foreach (Button btn in options) // enable doors for the duration
