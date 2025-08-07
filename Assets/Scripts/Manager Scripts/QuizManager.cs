@@ -38,7 +38,7 @@ public class QuizManager : MonoBehaviour
         RadialTimer.Instance.StartCountdown(timeLimit);
 
         MovingPanel.Instance.SetTimer(timeLimit); // Set the timer's time
-        timer.StartMasterTimer(masterTimeLimit); // Start the Master timer
+        //timer.StartMasterTimer(masterTimeLimit); // Start the Master timer
         timer.StartTimer(timeLimit); // Start the moving panel
 
         if (unansweredQuestions == null || unansweredQuestions.Count == 0)
@@ -55,16 +55,16 @@ public class QuizManager : MonoBehaviour
     private void QuestionTimer() // Run the moving questions and quiz timer
     {
         // Master Timer, How much time the player has to play the quiz //
-        if (timer.isMasterRunning == true)
-        {
-            timer.RunMasterTimer();
-            HUDManager.Instance.SetMasterTimer(timer.currMasterTime);
+        //if (timer.isMasterRunning == true)
+       // {
+         //   timer.RunMasterTimer();
+        //    HUDManager.Instance.SetMasterTimer(timer.currMasterTime);
 
-            if (timer.currMasterTime == 0)
-            {
-                EndGame();
-            }
-        }
+        //    if (timer.currMasterTime == 0)
+         //   {
+         //       EndGame();
+        //    }
+        //}
         // Question Timer, How much time it takes for the moving question to "squish the player" causing a game over //
         if (timer.isRunning == true)
         {
@@ -158,7 +158,7 @@ public class QuizManager : MonoBehaviour
             HUDManager.Instance.AddScore(scoreValueCorrect); // add points
 
             timer.isRunning = false; // stop the moving question
-            timer.isMasterRunning = false; // stop the timer
+            //timer.isMasterRunning = false; // stop the timer
             RadialTimer.Instance.RestartCountdown();
         }
         else  // If the player answer wrong
@@ -206,7 +206,7 @@ public class QuizManager : MonoBehaviour
         }
 
         timer.StartTimer(timeLimit); // Restart the timer 
-        timer.isMasterRunning = true;
+        //timer.isMasterRunning = true;
         RadialTimer.Instance.StartCountdown(timeLimit);
         GetQuestion(); // Get a new question
 

@@ -6,9 +6,9 @@ public class Timer
     public float currTime;
     public float maxTime;
 
-    public bool isMasterRunning;
-    public float currMasterTime;
-    public float maxMasterTime;
+    //public bool isMasterRunning;
+    //public float currMasterTime;
+    //public float maxMasterTime;
 
     public void StartTimer(float value)
     {
@@ -16,12 +16,12 @@ public class Timer
         currTime = maxTime;
         isRunning = true;
     }
-    public void StartMasterTimer(float value)
-    {
-        maxMasterTime = value;
-        currMasterTime = maxMasterTime;
-        isMasterRunning = true;
-    }
+    //public void StartMasterTimer(float value)
+    //{
+     //   maxMasterTime = value;
+     //   currMasterTime = maxMasterTime;
+     //   isMasterRunning = true;
+    //}
     public void RunTimer()
     {
         currTime -= UnityEngine.Time.deltaTime;
@@ -32,14 +32,14 @@ public class Timer
             isRunning = false;
         }
     }
-    public void RunMasterTimer()
-    {
-        currMasterTime -= UnityEngine.Time.deltaTime;
-
-        if (currMasterTime <= 0)
-        {
-            currMasterTime = 0;
-            isMasterRunning = false;
-        }
-    }
+    //public void RunMasterTimer()
+    //{
+     //   currMasterTime -= UnityEngine.Time.deltaTime;
+     //
+     //   if (currMasterTime <= 0)
+      //  {
+      //      currMasterTime = 0;
+      //      isMasterRunning = false;
+      //  }
+   // }
 }

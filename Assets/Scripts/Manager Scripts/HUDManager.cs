@@ -6,8 +6,8 @@ public class HUDManager : MonoBehaviour
     public static HUDManager Instance;
     
     [SerializeField] private Text scoreText;
-    [SerializeField] private Text timerText;
-    [SerializeField] private Text masterTimerText;
+    //[SerializeField] private Text timerText;
+    //[SerializeField] private Text masterTimerText;
     [SerializeField] private Text ammoText;
     
     [SerializeField] private GameObject gameOverScreen;
@@ -34,7 +34,7 @@ public class HUDManager : MonoBehaviour
     void Start()
     {
         UpdateScore();
-        UpdateMasterTimer();
+        //UpdateMasterTimer();
         UpdateAmmo();
         GameOver(false);
     }
@@ -46,7 +46,7 @@ public class HUDManager : MonoBehaviour
     public void SetMasterTimer(float value)
     {
         masterTime = value;
-        UpdateMasterTimer();
+        //UpdateMasterTimer();
     }
     public void AmmoCount(int value)
     {
@@ -113,12 +113,12 @@ public class HUDManager : MonoBehaviour
             //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(score));
         }
     }
-    private void UpdateMasterTimer()
-    {
-        int seconds = Mathf.FloorToInt(masterTime);
-        int milliseconds = Mathf.FloorToInt((masterTime - seconds) * 100);
-        masterTimerText.text = string.Format("{0:00}:{1:00}", seconds, milliseconds);
-    }
+   // private void UpdateMasterTimer()
+    //{
+        //int seconds = Mathf.FloorToInt(masterTime);
+        //int milliseconds = Mathf.FloorToInt((masterTime - seconds) * 100);
+        //masterTimerText.text = string.Format("{0:00}:{1:00}", seconds, milliseconds);
+    //}
     private void UpdateAmmo()
     {
         ammoText.text = "Ammo: " + ammo.ToString();
