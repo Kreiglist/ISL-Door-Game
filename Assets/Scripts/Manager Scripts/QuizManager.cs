@@ -54,23 +54,10 @@ public class QuizManager : MonoBehaviour
 
     private void QuestionTimer() // Run the moving questions and quiz timer
     {
-        // Master Timer, How much time the player has to play the quiz //
-        //if (timer.isMasterRunning == true)
-       // {
-         //   timer.RunMasterTimer();
-        //    HUDManager.Instance.SetMasterTimer(timer.currMasterTime);
-
-        //    if (timer.currMasterTime == 0)
-         //   {
-         //       EndGame();
-        //    }
-        //}
-        // Question Timer, How much time it takes for the moving question to "squish the player" causing a game over //
         if (timer.isRunning == true)
         {
             timer.RunTimer();
             MovingPanel.Instance.MovePanel();
-
             if (timer.currTime == 0) // End the game when the player runs out of time
             {
                 EndGame();
