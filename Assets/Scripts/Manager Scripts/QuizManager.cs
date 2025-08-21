@@ -159,7 +159,7 @@ public class QuizManager : MonoBehaviour
             options[btnIndex].interactable = false; // disable the recently clicked door/option
         }
     }
-    private void EndGame()
+    public void EndGame()
     {
         HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(HUDManager.Instance.Score));
         HUDManager.Instance.GameOver(true); // Activate the game over screen

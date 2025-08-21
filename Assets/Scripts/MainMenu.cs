@@ -15,6 +15,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+    public void EndGameToHighscore()
+    {
+        QuizManager.instance.EndGame();
+    }
     public void QuitGame()
     {
         Debug.Log("Game Closed");
