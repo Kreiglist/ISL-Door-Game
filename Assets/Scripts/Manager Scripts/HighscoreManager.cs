@@ -23,7 +23,6 @@ public class HighscoreManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     private void Start()
     {
         LoadHighscores();

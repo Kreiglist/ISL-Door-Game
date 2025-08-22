@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class MovingPanel : MonoBehaviour
+public class MovingWall : MonoBehaviour
 {
-    public static MovingPanel Instance;
+    public static MovingWall Instance;
     float duration;
     Vector3 startPos;
     Vector3 targetPos;
     float elapsedTime = 0f;
     bool movingToTarget = true;
+
     private void Awake()
     {
         if (Instance == null)
@@ -25,12 +26,12 @@ public class MovingPanel : MonoBehaviour
     {
         duration = value;
     }
-    public void ResetPanel()
+    public void ResetWall()
     {
         elapsedTime = 0f; // Reset timer to restart movement
         movingToTarget = !movingToTarget; // Swap direction after reaching the destination
     }
-    public void MovePanel()
+    public void MoveWall()
     {
         if (elapsedTime < duration)
         {

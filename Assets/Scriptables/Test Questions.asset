@@ -24,5 +24,4 @@ MonoBehaviour:
     options:
     - A
     - B
-    - C
     answer: B

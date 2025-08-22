@@ -14,7 +14,6 @@ public class QuizManager : MonoBehaviour
 
     [SerializeField] public int scoreValueCorrect = 100;
     [SerializeField] public int scoreValueIncorrect = -50;
-    [SerializeField] public float masterTimeLimit;
     [SerializeField] public float timeLimit;
 
     private static List<Question> unansweredQuestions;
@@ -37,8 +36,7 @@ public class QuizManager : MonoBehaviour
         HUDManager.Instance.AmmoCount(ammo.currAmmo); // Display the ammunition
         RadialTimer.Instance.StartCountdown(timeLimit);
 
-        MovingPanel.Instance.SetTimer(timeLimit); // Set the timer's time
-        //timer.StartMasterTimer(masterTimeLimit); // Start the Master timer
+        MovingWall.Instance.SetTimer(timeLimit); // Set the timer's time
         timer.StartTimer(timeLimit); // Start the moving panel
 
         if (unansweredQuestions == null || unansweredQuestions.Count == 0)
@@ -49,15 +47,14 @@ public class QuizManager : MonoBehaviour
     }
     private void Update()
     {
-        QuestionTimer();
+        RunQuiz();
     }
-
-    private void QuestionTimer() // Run the moving questions and quiz timer
+    private void RunQuiz() // Run the moving questions and quiz timer
     {
         if (timer.isRunning == true)
         {
             timer.RunTimer();
-            MovingPanel.Instance.MovePanel();
+            MovingWall.Instance.MoveWall();
             if (timer.currTime == 0) // End the game when the player runs out of time
             {
                 EndGame();
@@ -70,6 +67,7 @@ public class QuizManager : MonoBehaviour
         currQuestion = unansweredQuestions[randQuestionIdx];
 
         DisplayQuestion();
+        DisplayAnswers();
     }
     private void DisplayQuestion() // Display the question and its options
     {
@@ -90,11 +88,15 @@ public class QuizManager : MonoBehaviour
         {
             Debug.LogError("currQuestion is NULL! No question assigned.");
         }
+    }
+    private void DisplayAnswers()
+    {
         // Assign answer choices to options/doors //
         for (int i = 0; i < options.Count; i++)
         {
             if (i < currQuestion.options.Count)
             {
+                options[i].gameObject.SetActive(true); // Show buttons/doors
                 options[i].GetComponentInChildren<Text>().text = currQuestion.options[i]; // Assign text
                 int index = i; // Store index to avoid closure issues
                 // Remove old listeners and add new one
@@ -113,22 +115,16 @@ public class QuizManager : MonoBehaviour
     }
     private void AnswerGun(bool correct) // Function for adding and removing bullets/lives
     {
-        if (correct == true)
-        {
-            ammo.Gain(1);
-        }
-        else
-        {
-            ammo.Reduce(1);
-        }
+        if (correct == true) ammo.Gain(1);
+        else ammo.Reduce(1);
         // Argument for when the player runs out of bullets //
         if (ammo.currAmmo == 0)
         {
-            EndGame();
             foreach (Button btn in options)
             {
                 btn.interactable = false;
             }
+            EndGame();
         }
     }
     public void Answer(int btnIndex) // Function for answering / clicking buttons (or doors)
@@ -145,7 +141,6 @@ public class QuizManager : MonoBehaviour
             HUDManager.Instance.AddScore(scoreValueCorrect); // add points
 
             timer.isRunning = false; // stop the moving question
-            //timer.isMasterRunning = false; // stop the timer
             RadialTimer.Instance.RestartCountdown();
         }
         else  // If the player answer wrong
@@ -193,7 +188,6 @@ public class QuizManager : MonoBehaviour
         }
 
         timer.StartTimer(timeLimit); // Restart the timer 
-        //timer.isMasterRunning = true;
         RadialTimer.Instance.StartCountdown(timeLimit);
         GetQuestion(); // Get a new question
 
@@ -202,7 +196,7 @@ public class QuizManager : MonoBehaviour
             btn.interactable = true;
         }
 
-        MovingPanel.Instance.ResetPanel(); // Set the moving question back to its initial position
+        MovingWall.Instance.ResetWall(); // Set the moving question back to its initial position
         CutsceneManager.instance.CutscenePlayer(default);
         Gun.instance.GunAnimPlayer(default);
         yield return null;
