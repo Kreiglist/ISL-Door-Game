@@ -7,7 +7,8 @@ public class HUDManager : MonoBehaviour
     
     [SerializeField] private Text scoreText;
     [SerializeField] private Text ammoText;
-    
+    [SerializeField] private Text answeredQuestionText;
+
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private Text finalScoreText;
 
@@ -20,6 +21,7 @@ public class HUDManager : MonoBehaviour
 
     private int score;
     private int ammo;
+    private int answerCount;
     private void Awake()
     {
         if (Instance == null)
@@ -38,6 +40,15 @@ public class HUDManager : MonoBehaviour
     {
         score += value;
         UpdateScore();
+    }
+    public void AddQuestionCount (int value)
+    {
+        answerCount += value;
+        UpdateAnswerCount();
+    }
+    private void UpdateAnswerCount()
+    {
+        answeredQuestionText.text = answerCount.ToString();
     }
     public void AmmoCount(int value)
     {
