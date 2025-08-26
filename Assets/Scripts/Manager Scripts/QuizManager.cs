@@ -15,6 +15,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] public int scoreValueCorrect = 100;
     [SerializeField] public int scoreValueIncorrect = -50;
     [SerializeField] public float timeLimit;
+    private float initialTimeLimit;
     private int answeredQuestionCount;
 
     private static List<Question> unansweredQuestions;
@@ -33,6 +34,7 @@ public class QuizManager : MonoBehaviour
     }
     private void Start()
     {
+        initialTimeLimit = timeLimit;
         ammo.currAmmo = ammo.maxAmmo; // Start with full ammunition
         answeredQuestionCount = 0;
         HUDManager.Instance.AmmoCount(ammo.currAmmo); // Display the ammunition
@@ -47,7 +49,11 @@ public class QuizManager : MonoBehaviour
     }
     private void Update()
     {
-        RunQuiz(); 
+        RunQuiz();
+    }
+    public void SetDifficulty(float duration)
+    {
+        timeLimit = duration;
     }
     private void RunQuiz() // Run the moving questions and quiz timer
     {
@@ -137,20 +143,10 @@ public class QuizManager : MonoBehaviour
             AnswerGun(true); // Set to true, in which add shells
 
             HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
-            HUDManager.Instance.AddScore(scoreValueCorrect); // add points
-            answeredQuestionCount =+ 1;
+            HUDManager.Instance.AddScore(scoreValueCorrect, true); // add points
+            answeredQuestionCount++;
             HUDManager.Instance.AddQuestionCount(answeredQuestionCount);
-            switch (answeredQuestionCount)
-            {
-                case 3:
-                    timeLimit = timeLimit - (timeLimit / 4);
-                    RadialTimer.Instance.StartCountdown(timeLimit - (timeLimit / 4));
-                    MovingWall.Instance.SetTimer(timeLimit - (timeLimit / 4)); // Set the timer's time
-                    timer.StartTimer(timeLimit - (timeLimit / 4)); // Start the moving panel
-                    break;
-            }
-            //DifficultySpike(answeredQuestionCount);
-
+            DifficultySpike(answeredQuestionCount);
             timer.isRunning = false; // stop the moving question
             RadialTimer.Instance.RestartCountdown();
         }
@@ -160,7 +156,7 @@ public class QuizManager : MonoBehaviour
             AnswerGun(false); // Set to false, in which reduce shells
 
             HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
-            HUDManager.Instance.AddScore(scoreValueIncorrect); // deduct points
+            HUDManager.Instance.AddScore(scoreValueIncorrect, false); // deduct points
 
             options[btnIndex].interactable = false; // disable the recently clicked door/option
         }
@@ -169,11 +165,28 @@ public class QuizManager : MonoBehaviour
     {
         switch (count)
         {
-            case 3:
-                timeLimit = timeLimit - (timeLimit / 4);
-                RadialTimer.Instance.StartCountdown(timeLimit - (timeLimit/4));
-                MovingWall.Instance.SetTimer(timeLimit - (timeLimit / 4)); // Set the timer's time
-                timer.StartTimer(timeLimit - (timeLimit / 4)); // Start the moving panel
+            case 7:
+                timeLimit = timeLimit - (initialTimeLimit / 4);
+                MovingWall.Instance.SetTimer(timeLimit);
+                Debug.Log("Wassup.");
+                break;
+            case 14:
+                timeLimit = timeLimit - (initialTimeLimit / 4);
+                MovingWall.Instance.SetTimer(timeLimit);
+                Debug.Log("Wassup.");
+                break;
+            case 21:
+                timeLimit = timeLimit - (initialTimeLimit / 4);
+                MovingWall.Instance.SetTimer(timeLimit);
+                Debug.Log("Wassup.");
+                break;
+            case 28:
+                timeLimit = timeLimit - 1f;
+                MovingWall.Instance.SetTimer(timeLimit);
+                Debug.Log("Wassup.");
+                break;
+            default:
+                Debug.Log("Switch hit default, count = " + count);
                 break;
         }
     }
@@ -209,7 +222,6 @@ public class QuizManager : MonoBehaviour
             // If there are no unanswered questions in the list, then refresh the list
             unansweredQuestions = questionsList.questions.ToList<Question>();
         }
-
         timer.StartTimer(timeLimit); // Restart the timer 
         RadialTimer.Instance.StartCountdown(timeLimit);
         GetQuestion(); // Get a new question

@@ -22,6 +22,7 @@ public class HUDManager : MonoBehaviour
     private int score;
     private int ammo;
     private int answerCount;
+    private int scoreIncrement;
     private void Awake()
     {
         if (Instance == null)
@@ -36,14 +37,43 @@ public class HUDManager : MonoBehaviour
         UpdateAmmo();
         GameOver(false);
     }
-    public void AddScore(int value)
+    public void AddScore(int value, bool correct)
     {
         score += value;
-        UpdateScore();
+        scoreIncrement = value;
+        PrintScore(correct);
+    }
+    private void PrintScore(bool correct)
+    {
+        switch (correct)
+        {
+            case true:
+                scoreText.text = "+" + scoreIncrement.ToString();
+                Invoke(nameof(UpdateScore), 1.0f);
+                break;
+            case false:
+                scoreText.text = scoreIncrement.ToString();
+                Invoke(nameof(UpdateScore), 1.0f);
+                break;
+        }
+    }
+    private void UpdateScore()
+    {
+        if (score >= 0)
+        {
+            scoreText.text = "Score:" + score.ToString();
+            finalScoreText.text = "Your Score: " + score.ToString();
+            //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(score));
+        }
+        else if(score <= 0)
+        {
+            scoreText.text = "Score:" + 0;
+            finalScoreText.text = "Your Score: " + 0;
+        }
     }
     public void AddQuestionCount (int value)
     {
-        answerCount += value;
+        answerCount = value;
         UpdateAnswerCount();
     }
     private void UpdateAnswerCount()
@@ -60,7 +90,7 @@ public class HUDManager : MonoBehaviour
         if (activate == true) // Activate the game over screen and stop the game from running
         {
             gameOverScreen.SetActive(true);
-            UpdateScore();
+            //UpdateScore();
             Time.timeScale = 0;
         }
         else // Make sure the game over screen is off and the game and coroutines are running
@@ -103,16 +133,6 @@ public class HUDManager : MonoBehaviour
                 texts[0].text = (i+1).ToString();
                 texts[1].text = he.highscore.ToString();
             }
-        }
-    }
-
-    private void UpdateScore()
-    {
-        if (score >= 0)
-        {
-            scoreText.text = "Score:" + score.ToString();
-            finalScoreText.text = "Your Score: " + score.ToString();
-            //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(score));
         }
     }
     private void UpdateAmmo()

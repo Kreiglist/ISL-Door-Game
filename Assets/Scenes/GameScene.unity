@@ -2479,7 +2479,7 @@ MonoBehaviour:
   - {fileID: 558175323}
   scoreValueCorrect: 100
   scoreValueIncorrect: -50
-  timeLimit: 12
+  timeLimit: 10
   timer:
     isRunning: 0
     currTime: 0
@@ -5337,7 +5337,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ammo
+  m_Text: 'Ammo: 0'
 --- !u!222 &1525565991
 CanvasRenderer:
   m_ObjectHideFlags: 0

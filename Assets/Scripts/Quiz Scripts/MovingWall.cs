@@ -8,7 +8,6 @@ public class MovingWall : MonoBehaviour
     Vector3 targetPos;
     float elapsedTime = 0f;
     bool movingToTarget = true;
-
     private void Awake()
     {
         if (Instance == null)
