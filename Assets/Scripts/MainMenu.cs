@@ -2,13 +2,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
+    public static MainMenu instance;
+    public bool toTutorial;
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene");
     }
     public void StartTutorial()
     {
-        SceneManager.LoadScene("Tutorial");
+        if(toTutorial == true) SceneManager.LoadScene("Tutorial");
+        else SceneManager.LoadScene("GameScene");
     }
     public void ReturnToMenu()
     {

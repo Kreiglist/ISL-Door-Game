@@ -2478,7 +2478,7 @@ MonoBehaviour:
   - {fileID: 437144884}
   - {fileID: 558175323}
   scoreValueCorrect: 100
-  scoreValueIncorrect: -50
+  scoreValueIncorrect: -75
   timeLimit: 10
   timer:
     isRunning: 0

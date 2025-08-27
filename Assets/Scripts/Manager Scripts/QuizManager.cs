@@ -12,11 +12,12 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private Image questionImg; // The image component that will display the question images
     [SerializeField] private List<Button> options; // The options / doors
 
-    [SerializeField] public int scoreValueCorrect = 100;
-    [SerializeField] public int scoreValueIncorrect = -50;
+    [SerializeField] public int scoreValueCorrect;
+    [SerializeField] public int scoreValueIncorrect;
     [SerializeField] public float timeLimit;
     private float initialTimeLimit;
     private int answeredQuestionCount;
+    private int ammoReduce = 1;
 
     private static List<Question> unansweredQuestions;
     private Question currQuestion;
@@ -121,7 +122,7 @@ public class QuizManager : MonoBehaviour
     private void AnswerGun(bool correct) // Function for adding and removing bullets/lives
     {
         if (correct == true) ammo.Gain(1);
-        else ammo.Reduce(1);
+        else ammo.Reduce(ammoReduce);
         // Argument for when the player runs out of bullets //
         if (ammo.currAmmo == 0)
         {
@@ -154,10 +155,8 @@ public class QuizManager : MonoBehaviour
         {
             StartCoroutine(CorrectAnswer(false));
             AnswerGun(false); // Set to false, in which reduce shells
-
             HUDManager.Instance.AmmoCount(ammo.currAmmo); // Update the shells counter
             HUDManager.Instance.AddScore(scoreValueIncorrect, false); // deduct points
-
             options[btnIndex].interactable = false; // disable the recently clicked door/option
         }
     }
@@ -168,22 +167,20 @@ public class QuizManager : MonoBehaviour
             case 7:
                 timeLimit = timeLimit - (initialTimeLimit / 4);
                 MovingWall.Instance.SetTimer(timeLimit);
-                Debug.Log("Wassup.");
                 break;
             case 14:
                 timeLimit = timeLimit - (initialTimeLimit / 4);
                 MovingWall.Instance.SetTimer(timeLimit);
-                Debug.Log("Wassup.");
                 break;
             case 21:
                 timeLimit = timeLimit - (initialTimeLimit / 4);
+                ammoReduce = 2;
                 MovingWall.Instance.SetTimer(timeLimit);
-                Debug.Log("Wassup.");
                 break;
             case 28:
                 timeLimit = timeLimit - 1f;
+                ammoReduce = 3;
                 MovingWall.Instance.SetTimer(timeLimit);
-                Debug.Log("Wassup.");
                 break;
             default:
                 Debug.Log("Switch hit default, count = " + count);
@@ -214,7 +211,6 @@ public class QuizManager : MonoBehaviour
         {
             btn.onClick.RemoveAllListeners();
         }
-
         unansweredQuestions.Remove(currQuestion); // remove recently answered question
 
         if (unansweredQuestions == null || unansweredQuestions.Count == 0) // So the questions will cycle
