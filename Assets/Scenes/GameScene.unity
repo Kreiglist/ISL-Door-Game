@@ -721,6 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d89e8d186e8241a9a2857589c142c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toTutorial: 0
 --- !u!114 &137584580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,6 +737,7 @@ MonoBehaviour:
   pauseScreen: {fileID: 1056894022}
   bookScreen: {fileID: 381835238}
   bookSFX: {fileID: 8300000, guid: 4a737ca52e1496c4e9604e28caa21ebc, type: 3}
+  cutsceneScreen: {fileID: 3993097046618736848}
 --- !u!1 &167758933
 GameObject:
   m_ObjectHideFlags: 0

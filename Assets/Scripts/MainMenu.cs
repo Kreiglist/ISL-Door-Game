@@ -4,6 +4,14 @@ public class MainMenu : MonoBehaviour
 {
     public static MainMenu instance;
     public bool toTutorial;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else Destroy(gameObject);
+    }
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene");

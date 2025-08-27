@@ -14,8 +14,8 @@ public class DifficultyMenu : MonoBehaviour
     }
     void Start()
     {
-        toggle = GetComponentInChildren<Toggle>();
-        toggle.onValueChanged.AddListener(delegate (bool value){
+        toggle = GetComponentInChildren<Toggle>(true);
+        toggle.onValueChanged.AddListener(delegate (bool value) {
             ToggleTutorial(value);
         });
     }
