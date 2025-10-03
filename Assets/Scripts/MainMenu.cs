@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
     }
     public void EndGameToHighscore()
     {
-        QuizManager.instance.EndGame();
+        SceneManager.LoadScene("HighScores");
     }
     public void QuitGame()
     {

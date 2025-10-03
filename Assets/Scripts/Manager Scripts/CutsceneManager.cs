@@ -5,7 +5,6 @@ public class CutsceneManager : MonoBehaviour
 {
     public static CutsceneManager instance;
 
-    //[SerializeField] private GameObject menuCutscene;
     [SerializeField] private GameObject cutsceneScreen;
     [SerializeField] private AudioClip walkSFX;
 

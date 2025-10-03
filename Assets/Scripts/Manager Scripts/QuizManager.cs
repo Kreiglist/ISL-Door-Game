@@ -15,7 +15,6 @@ public class QuizManager : MonoBehaviour
     [SerializeField] public int scoreValueCorrect;
     [SerializeField] public int scoreValueIncorrect;
     [SerializeField] public float timeLimit;
-    private float initialTimeLimit;
     private int answeredQuestionCount;
     private int ammoReduce = 1;
 
@@ -35,7 +34,6 @@ public class QuizManager : MonoBehaviour
     }
     private void Start()
     {
-        initialTimeLimit = timeLimit;
         ammo.currAmmo = ammo.maxAmmo; // Start with full ammunition
         answeredQuestionCount = 0;
         HUDManager.Instance.AmmoCount(ammo.currAmmo); // Display the ammunition
@@ -162,34 +160,36 @@ public class QuizManager : MonoBehaviour
     }
     private void DifficultySpike(int count)
     {
-        switch (count)
+        if (count % 7 == 0 && count <= 28)
         {
-            case 7:
-                timeLimit = timeLimit - (initialTimeLimit / 4);
-                MovingWall.Instance.SetTimer(timeLimit);
-                break;
-            case 14:
-                timeLimit = timeLimit - (initialTimeLimit / 4);
-                MovingWall.Instance.SetTimer(timeLimit);
-                break;
-            case 21:
-                timeLimit = timeLimit - (initialTimeLimit / 4);
+            timeLimit -= (timeLimit / 4);
+            if (count == 21)
+            {
                 ammoReduce = 2;
-                MovingWall.Instance.SetTimer(timeLimit);
-                break;
-            case 28:
-                timeLimit = timeLimit - 1f;
+            }
+            else if (count == 28)
+            {
                 ammoReduce = 3;
-                MovingWall.Instance.SetTimer(timeLimit);
-                break;
-            default:
-                Debug.Log("Switch hit default, count = " + count);
-                break;
+            }
+            MovingWall.Instance.SetTimer(timeLimit);
+        }
+        else
+        {
+            if (count > 28)
+            {
+                timeLimit -= 1f;
+                if (timeLimit < 1f)
+                {
+                    timeLimit = 2f;
+                }
+            }
+            MovingWall.Instance.SetTimer(timeLimit);
         }
     }
     public void EndGame()
     {
         HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(HUDManager.Instance.Score));
+        //MainMenu.instance.EndGameToHighscore();
         HUDManager.Instance.GameOver(true); // Activate the game over screen
     }
     // IENUMERATORS
