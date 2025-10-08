@@ -163,13 +163,17 @@ public class QuizManager : MonoBehaviour
         if (count % 7 == 0 && count <= 28)
         {
             timeLimit -= (timeLimit / 4);
-            if (count == 21)
+            if (count == 21) 
             {
-                ammoReduce = 2;
+                ammo.maxAmmo = 3;
+                if (ammo.currAmmo > ammo.maxAmmo) ammo.currAmmo = ammo.maxAmmo;
+                HUDManager.Instance.AmmoCount(ammo.currAmmo);
             }
-            else if (count == 28)
+            else if (count == 28) 
             {
-                ammoReduce = 3;
+                ammo.maxAmmo = 2;
+                if(ammo.currAmmo > ammo.maxAmmo) ammo.currAmmo = ammo.maxAmmo;
+                HUDManager.Instance.AmmoCount(ammo.currAmmo);
             }
             MovingWall.Instance.SetTimer(timeLimit);
         }
