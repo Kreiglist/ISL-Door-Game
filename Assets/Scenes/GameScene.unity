@@ -6309,6 +6309,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1779535599}
     - target: {fileID: 355994080305152753, guid: ac6fcfcb724ad1642b97afa8bd7844ff, type: 3}
+      propertyPath: ammoObject
+      value: 
+      objectReference: {fileID: 5852854208543722324, guid: 183e933004765ac44859b927159edeab, type: 3}
+    - target: {fileID: 355994080305152753, guid: ac6fcfcb724ad1642b97afa8bd7844ff, type: 3}
       propertyPath: radialTimer
       value: 
       objectReference: {fileID: 1218336447}

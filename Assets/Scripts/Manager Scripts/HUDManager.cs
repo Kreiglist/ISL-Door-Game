@@ -15,6 +15,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private GameObject highscorePrefab;
     [SerializeField] private Transform highscoreFrame;
     List<GameObject> highscoreUI = new List<GameObject>();
+    [SerializeField] private GameObject ammoObject;
 
     [SerializeField] private GameObject radialTimer;
     public bool isRadialActive;
@@ -138,5 +139,9 @@ public class HUDManager : MonoBehaviour
     private void UpdateAmmo()
     {
         ammoText.text = "Ammo: " + ammo.ToString();
+        for(int i = 0; i <= ammo; i++)
+        {
+            Instantiate(ammoObject);
+        }
     }
 }
