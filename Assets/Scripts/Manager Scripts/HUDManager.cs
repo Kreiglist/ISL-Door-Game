@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class HUDManager : MonoBehaviour
@@ -9,12 +8,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private Text ammoText;
     [SerializeField] private Text answeredQuestionText;
 
-    [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private Text finalScoreText;
+    //[SerializeField] private Text finalScoreText;
 
-    [SerializeField] private GameObject highscorePrefab;
-    [SerializeField] private Transform highscoreFrame;
-    List<GameObject> highscoreUI = new List<GameObject>();
     [SerializeField] private GameObject ammoObject;
 
     [SerializeField] private GameObject radialTimer;
@@ -63,13 +58,12 @@ public class HUDManager : MonoBehaviour
         if (score >= 0)
         {
             scoreText.text = "Score:" + score.ToString();
-            finalScoreText.text = "Your Score: " + score.ToString();
-            //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(score));
+            //finalScoreText.text = "Your Score: " + score.ToString();
         }
         else if(score <= 0)
         {
             scoreText.text = "Score:" + 0;
-            finalScoreText.text = "Your Score: " + 0;
+            //finalScoreText.text = "Your Score: " + 0;
         }
     }
     public void AddQuestionCount (int value)
@@ -90,14 +84,14 @@ public class HUDManager : MonoBehaviour
     {
         if (activate == true) // Activate the game over screen and stop the game from running
         {
-            gameOverScreen.SetActive(true);
+            //gameOverScreen.SetActive(true);
             //UpdateScore();
             Time.timeScale = 0;
         }
         else // Make sure the game over screen is off and the game and coroutines are running
         {
             Time.timeScale = 1;
-            gameOverScreen.SetActive(false);
+            //gameOverScreen.SetActive(false);
         }
     }
     public int Score
@@ -107,35 +101,7 @@ public class HUDManager : MonoBehaviour
             return score;
         }
     }
-    private void OnEnable()
-    {
-        HighscoreManager.onHighscoreListChanged += UpdateHighscore;
-    }
-    private void OnDisable()
-    {
-        HighscoreManager.onHighscoreListChanged -= UpdateHighscore;
-    }
-    private void UpdateHighscore(List<HighscoreElements> list)
-    {
-        for(int i = 0; i < list.Count; i++)
-        {
-            HighscoreElements he = list[i];
 
-            if(he.highscore >= 0)
-            {
-                if(i >= highscoreUI.Count)
-                {
-                    var inst = Instantiate(highscorePrefab, Vector3.zero, Quaternion.identity);
-                    inst.transform.SetParent(highscoreFrame, false);
-
-                    highscoreUI.Add(inst);
-                }
-                var texts = highscoreUI[i].GetComponentsInChildren<Text>();
-                texts[0].text = (i+1).ToString();
-                texts[1].text = he.highscore.ToString();
-            }
-        }
-    }
     private void UpdateAmmo()
     {
         ammoText.text = "Ammo: " + ammo.ToString();

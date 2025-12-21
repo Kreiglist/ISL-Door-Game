@@ -247,6 +247,43 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efa9fe0ddcf7cbd4cb4f390ffdc01e70, type: 3}
+--- !u!224 &567211165 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8679442773807091160, guid: efa9fe0ddcf7cbd4cb4f390ffdc01e70, type: 3}
+  m_PrefabInstance: {fileID: 567211164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &751071817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 751071818}
+  m_Layer: 0
+  m_Name: MANAGERS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &751071818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751071817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1890983361}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &792716302
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +406,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 751071818}
     m_Modifications:
     - target: {fileID: 4699845523511866544, guid: 03178c4f30a47c14d94547ed5e39bebf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -411,6 +448,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6240658251102488883, guid: 03178c4f30a47c14d94547ed5e39bebf, type: 3}
+      propertyPath: highscoreFrame
+      value: 
+      objectReference: {fileID: 567211165}
+    - target: {fileID: 6240658251102488883, guid: 03178c4f30a47c14d94547ed5e39bebf, type: 3}
+      propertyPath: highscorePrefab
+      value: 
+      objectReference: {fileID: 4719108122539136024, guid: db5dd86578c301b4384539911f7d62cf, type: 3}
     - target: {fileID: 8457316091895424408, guid: 03178c4f30a47c14d94547ed5e39bebf, type: 3}
       propertyPath: m_Name
       value: Highscore Manager
@@ -492,6 +537,11 @@ Transform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 678255249257737442, guid: efa9fe0ddcf7cbd4cb4f390ffdc01e70, type: 3}
   m_PrefabInstance: {fileID: 567211164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1890983361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4699845523511866544, guid: 03178c4f30a47c14d94547ed5e39bebf, type: 3}
+  m_PrefabInstance: {fileID: 1119285609}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2011895042
 GameObject:
@@ -592,4 +642,4 @@ SceneRoots:
   - {fileID: 2011895045}
   - {fileID: 792716306}
   - {fileID: 1517779859}
-  - {fileID: 1119285609}
+  - {fileID: 751071818}

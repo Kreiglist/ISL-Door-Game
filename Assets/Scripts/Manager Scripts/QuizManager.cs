@@ -192,9 +192,9 @@ public class QuizManager : MonoBehaviour
     }
     public void EndGame()
     {
-        HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(HUDManager.Instance.Score));
-        //MainMenu.instance.EndGameToHighscore();
-        HUDManager.Instance.GameOver(true); // Activate the game over screen
+        //HighscoreManager.highscoreManager.AddHighscore(new HighscoreElements(HUDManager.Instance.Score));
+        MainMenu.instance.EndGameToHighscore();
+        //HUDManager.Instance.GameOver(true); // Activate the game over screen
     }
     // IENUMERATORS
     private IEnumerator CorrectAnswer(bool answer)
